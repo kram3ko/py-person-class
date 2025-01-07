@@ -17,11 +17,7 @@ def create_person_list(people: list[dict]) -> list:
         spouse_name = person[spouse_key]
         if spouse_name in Person.people:
             spouse = Person.people[spouse_name]
-            if spouse_key == "wife":
-                current_person.wife = spouse
-                spouse.husband = current_person
-            else:
-                current_person.husband = spouse
-                spouse.wife = current_person
+            setattr(current_person, spouse_key, spouse)
+            setattr(spouse, "wife" if spouse_key == "husband" else "husband", current_person)
 
     return list(Person.people.values())
