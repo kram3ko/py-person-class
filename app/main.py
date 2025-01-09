@@ -11,6 +11,9 @@ class Person:
 
 
 def create_person_list(people: list[dict]) -> list:
+    # Очищаем глобальный словарь перед созданием новых объектов
+    Person.people.clear()
+
     for person in people:
         current_person = Person(person["name"], person["age"])
         spouse_key = "wife" if "wife" in person else "husband"
@@ -18,6 +21,7 @@ def create_person_list(people: list[dict]) -> list:
         if spouse_name in Person.people:
             spouse = Person.people[spouse_name]
             setattr(current_person, spouse_key, spouse)
-            setattr(spouse, "wife" if spouse_key == "husband" else "husband", current_person)
+            setattr(spouse, "wife" if spouse_key == "husband"
+                    else "husband", current_person)
 
     return list(Person.people.values())
