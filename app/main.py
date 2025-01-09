@@ -11,7 +11,7 @@ class Person:
 
 
 def create_person_list(people: list[dict]) -> list:
-    # Очищаем глобальный словарь перед созданием новых объектов
+    # Clear global dict before create new objects
     Person.people.clear()
 
     for person in people:
